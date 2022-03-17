@@ -1,0 +1,56 @@
+CIMCP code
+===========
+Detailed instructions can be found at:
+http://www.cs.kuleuven.be/~dtai/CP4IM/cimcp.php
+
+Publications:
+    - S. Nijssen, T. Guns, L. De Raedt. Correlated itemset mining in ROC space: A constraint programming approach, KDD 2009.
+    - T. Guns, S. Nijssen, L. De Raedt. Itemset mining: A constraint programming perspective, Artificial Intelligence 175(12-13), 2011.
+
+
+Input:
+   The dataset has to be in annotated transaction format with class labels: every line is one transaction. A transaction is a space-separated list of item identifiers (offset 0). The last item is either 1 or 0 and represents the class label.
+
+Running:
+  Warning: The gecode libraries must be in your $LD_LIBRARY_PATH (eg. export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/tias/local/lib")
+
+Every model has a separate binary, run it with the -help switch for detailed explanations and a usage example.
+  For example, ./cimcp_infgain -help tells us:
+...
+Specific options for cimcp_infgain:
+    -output (none, normal, cpvars) default: normal
+        type of output of solutions
+          none: do not output solutions
+          normal: print solutions (FIMI-style)
+          cpvars: print the CP variables of the solutions)
+    -cclause (unsigned int) default: 1
+        coverage constraint using clause ?
+    -datafile (filename with extention) default: example.txt
+        filename of dataset to use (any name)
+    -solfile (filename with extention) default: 
+        filename to write solutions to (any name)
+    -delta (floating point value) default: 0
+        delta parameter
+    -alpha (unsigned int) default: 1
+        alpha parameter
+Description:
+    This model finds discriminative patterns, using information gain as measure
+Usage example:
+    ./cimcp_infgain -datafile example.txt
+                -datafile example.txt    itemset file where last item is the class: 0 or 1
+                -alpha k     (default 1) use branch-and-bound search for top-k itemsets
+                -alpha 0     to find all patternsets given tresholds:
+                     -delta 0.50     minimal measure value
+
+
+Modifying:
+  One can easily create his own model with a different discriminative measure: copy an existing model (for example cimcp_infgain.cpp) and change the convex_function to the one you want to use. If you have a monotonic function, start from cimcp_accuracy.cpp.
+  To compile the new model, add it to the bottom of the Makefile.am file and rerun ../configure.
+
+
+For questions or bugreports, mail:
+tias.guns@cs.kuleuven.be
+
+
+Gecode:
+  For an introduction to gecode, read the excellent 'modeling with gecode' http://www.gecode.org/doc-latest/modeling.pdf

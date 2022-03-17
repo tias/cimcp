@@ -1,0 +1,19 @@
+== CIMCP 2.7, 2011-11-12 ==
+    First official release with the new build system
+
+    + Now automatically downloads and compiles Gecode (or point it to an existing install)
+    + configures our code with the same parameters
+    + Some changes to make the code work under windows
+    + Compatible with gecode 3.7.1 (and lower, and probably higher too)
+
+== CIMCP 2.1, 2009-12-17 ==
+    Release with Mac support, minor changes
+    + Tested on Mac: needed -lgecodesupport in the Makefile
+    + Support for gecode 3.2.2
+        - should be slightly more efficient because of better propagator for linear sum of booleans
+    + New print option: --print full, prints items and transactions
+    + Some cleanups in the common/ files
+
+== CIMCP 2.0, 2009-07-12 ==
+    Initial release
+    - builds upon FIM_CP, using the same common classes (in common/)
